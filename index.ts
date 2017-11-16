@@ -82,7 +82,9 @@ function makeHash(viewFunction: string): string {
     return createHash("MD5").update(viewFunction).digest("hex");
 }
 
-export default function elmStaticHtml(rootDir: string, viewFunction: string, options: Options): Promise<string> {
+export default function elmStaticHtml(tmpRootDir: string, viewFunction: string, options: Options): Promise<string> {
+    const rootDir = path.resolve(tmpRootDir);
+
     const viewHash = makeHash(viewFunction);
 
     const dirPath = path.join(rootDir, renderDirName);
